@@ -18,7 +18,7 @@ class ContributorsPresenter(
 
     override fun onContributionsAvailable(contributions: List<Contribution>) {
         view.isLoadingVisible = false
-        val top25Contributors = contributions.map { Contributor(it.author.login, it.author.avatarUrl, it.total, "Hello") }
+        val top25Contributors = contributions.map { Contributor(it.author.login, it.author.avatarUrl, it.total) }
                 .sortedByDescending { it.numberCommits }
                 .take(25)
         view.showContributors(top25Contributors)
