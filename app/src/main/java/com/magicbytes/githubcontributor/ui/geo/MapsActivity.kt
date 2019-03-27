@@ -39,7 +39,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        val location = "San Francisco"
+        val location = intent.getStringExtra("Location")
         val list = Geocoder(this).getFromLocationName(location, 1)
         val coordinates = LatLng(list[0].latitude, list[0].longitude)
         mMap.moveCamera(CameraUpdateFactory.newLatLng(coordinates))
