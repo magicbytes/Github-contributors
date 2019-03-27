@@ -1,6 +1,7 @@
 package com.magicbytes.githubcontributor.ui.contributors
 
 import com.magicbytes.githubcontributor.network.Contribution
+import com.magicbytes.githubcontributor.network.User
 
 class ContributorsPresenter(
         private val view: ContributorsView,
@@ -13,7 +14,11 @@ class ContributorsPresenter(
 
     fun showContributors() {
         view.isLoadingVisible = true
-        model.load()
+        model.loadContributors()
+    }
+
+    override fun onLocationUserAvailable(user: User) {
+        view.updateUserLocation(user)
     }
 
     override fun onContributionsAvailable(contributions: List<Contribution>) {
@@ -22,6 +27,7 @@ class ContributorsPresenter(
                 .sortedByDescending { it.numberCommits }
                 .take(25)
         view.showContributors(top25Contributors)
+        model.loadLocation(top25Contributors)
     }
 
     override fun onErrorLoadingContributions() {

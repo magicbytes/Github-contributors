@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import com.magicbytes.githubcontributor.R
+import com.magicbytes.githubcontributor.network.User
 import com.magicbytes.githubcontributor.ui.contributors.Contributor
 
 
@@ -27,6 +28,14 @@ class ContributorsAdapter(private val contributors: List<Contributor>) : Recycle
 
     override fun getItemCount(): Int {
         return contributors.size
+    }
+
+    fun updateLocation(user: User) {
+        val indexUser = contributors.indexOfFirst { it.userName == user.login }
+        if (indexUser != -1) {
+            contributors[indexUser].location = user.location ?: ""
+            notifyItemChanged(indexUser)
+        }
     }
 
     private fun setAnimation(viewToAnimate: View, position: Int) {

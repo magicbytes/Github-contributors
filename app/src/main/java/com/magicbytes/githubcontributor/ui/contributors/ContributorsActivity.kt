@@ -8,7 +8,9 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.magicbytes.githubcontributor.R
 import com.magicbytes.githubcontributor.network.Contribution
+import com.magicbytes.githubcontributor.network.User
 import com.magicbytes.githubcontributor.ui.contributors.adapter.ContributorsAdapter
+import com.magicbytes.githubcontributor.ui.geo.MapsActivity
 
 class ContributorsActivity : AppCompatActivity(), ContributorsView {
 
@@ -44,6 +46,11 @@ class ContributorsActivity : AppCompatActivity(), ContributorsView {
 
     override fun showContributors(contributors: List<Contributor>) {
         recyclerView?.adapter = ContributorsAdapter(contributors)
+    }
+
+    override fun updateUserLocation(user: User) {
+        val adapter = recyclerView?.adapter as? ContributorsAdapter ?: return
+        adapter.updateLocation(user)
     }
 
     override fun showNoData() {

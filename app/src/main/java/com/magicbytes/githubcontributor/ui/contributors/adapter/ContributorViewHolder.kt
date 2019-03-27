@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.magicbytes.githubcontributor.R
 import com.magicbytes.githubcontributor.ui.contributors.Contributor
+import com.magicbytes.githubcontributor.ui.geo.MapsActivity
 import com.squareup.picasso.Picasso
 
 class ContributorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,6 +36,7 @@ class ContributorViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) 
     }
 
     private fun showDetailsPost() {
-        val post = currentContributor ?: return
+        val contributor = currentContributor ?: return
+        MapsActivity.start(titleTextView.context, contributor.location)
     }
 }
